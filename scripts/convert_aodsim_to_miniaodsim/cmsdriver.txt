@@ -1,0 +1,22 @@
+# original command
+# (from https://cms-pdmv.cern.ch/mcm/requests?prepid=HIG-RunIIAutumn18MiniAOD-01719&page=0&shown=6291583)
+# with similar modifications as for gridpack to gensim step:
+# - name of input, output and configuration file
+# - number of events
+# note: this is for the 2018 sample, meant to be used with CMSSW_10_2_5!
+
+cmsDriver.py \
+--python_filename aodsimtominiaodsim_htowplusdsminus_cfg.py \
+--eventcontent MINIAODSIM \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier MINIAODSIM \
+--fileout file:aodsimtominiaodsim_htowplusdsminus.root \
+--conditions 102X_upgrade2018_realistic_v15 \
+--step PAT \
+--geometry DB:Extended \
+--filein file:rawtoaodsim_htowplusdsminus.root \
+--era Run2_2018 \
+--runUnscheduled \
+--no_exec \
+--mc \
+-n 10

@@ -1,0 +1,19 @@
+# Same as htowplusdsminus_dstophipi_phitokk_2018conditions_test.txt
+# but trying to run everything in a single step.
+# Not sure if this is possible, just for testing.
+
+cmsDriver.py Configuration/GenProduction/python/gridpacktogen_htowplusdsminus_dstophipi_phitokk_cfg.py \
+--eventcontent MINIAODSIM \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier MINIAODSIM \
+--conditions 102X_upgrade2018_realistic_v11 \
+--pileup_input "dbs:/Neutrino_E-10_gun/RunIISummer17PrePremix-PUAutumn18_102X_upgrade2018_realistic_v15-v1/GEN-SIM-DIGI-RAW" \
+#--procModifiers premix_stage2 \
+#--runUnscheduled \
+--beamspot Realistic25ns13TeVEarly2018Collision \
+--step LHE,GEN,SIM,DIGI,DATAMIX,L1,DIGI2RAW,HLT:@relval2018,RAW2DIGI,L1Reco,RECO,RECOSIM,EI,PAT
+--geometry DB:Extended \
+--era Run2_2018 \
+--no_exec \
+--mc \
+-n 1

@@ -1,0 +1,92 @@
+#############################################################
+# catalogue of cmsDriver commands for LHE -> GEN processing #
+#############################################################
+
+
+
+See private MC tutorial here: 
+https://docs.google.com/document/d/1YghFcqPGS8lx4OIpHWtpNHD8keQQf1vL5XtAP4TJBuo/edit 
+which contains this command:
+
+cmsDriver.py Configuration/GenProduction/python/PrivProd.py \
+--filein file:test.lhe \
+--fileout file:test_GEN-SIM.root \
+--mc \
+--eventcontent RAWSIM \
+--datatier GEN-SIM \
+--conditions 93X_mc2017_realistic_v3 \
+--beamspot Realistic25ns13TeVEarly2017Collision \
+--step GEN,SIM \
+--nThreads 1 \
+--geometry DB:Extended \
+--era Run2_2017 \
+--python_filename test_GEN-SIM_cfg.py \
+-n 100 \
+--no_exec \
+--customise Configuration/DataProcessing/Utils.addMonitoring
+
+(note that the names of configuration and input files should be adapted)
+ALSO NOTE THAT THE PATH TO THE CONFIGURATION FILE SHOULD ALWAYS BE THE ABSOLUTE PATH
+STARTING FROM THE CONFIGURATION/ LEVEL! 
+see here: https://twiki.cern.ch/twiki/bin/view/Main/RobinCMSSWErrors 
+However, this command runs two steps in a single go, output format is GEN-SIM
+
+
+
+Modified command to do only GEN level:
+
+cmsDriver.py Configuration/Genproduction/python/lhetogensim_cfg.py \
+--filein file:cmsgrid_final.lhe \
+--fileout file:test_GEN.root \
+--mc \
+--eventcontent RAWSIM \
+--datatier GEN \
+--conditions 93X_mc2017_realistic_v3 \
+--beamspot Realistic25ns13TeVEarly2017Collision \
+--step GEN \
+--nThreads 1 \
+--geometry DB:Extended \
+--era Run2_2017 \
+--python_filename test_GEN_cfg.py \
+-n 1000 \
+--no_exec \
+--customise Configuration/DataProcessing/Utils.addMonitoring
+
+
+For gg_H, H -> WD (preliminary version, configuration file to be checked!)
+
+cmsDriver.py Configuration/GenProduction/python/lhetogen_htowd_cfg.py \
+--filein file:cmsgrid_final.lhe \
+--fileout file:gen.root \
+--mc \
+--eventcontent RAWSIM \
+--datatier GEN \
+--conditions 93X_mc2017_realistic_v3 \
+--beamspot Realistic25ns13TeVEarly2017Collision \
+--step GEN \
+--nThreads 1 \
+--geometry DB:Extended \
+--era Run2_2017 \
+--python_filename gen_cfg.py \
+-n 1000 \
+--no_exec \
+--customise Configuration/DataProcessing/Utils.addMonitoring
+
+For gg_H, H -> ccbar (only for cross-checking the above)
+
+cmsDriver.py Configuration/GenProduction/python/lhetogen_htoccbar_cfg.py \
+--filein file:cmsgrid_final.lhe \
+--fileout file:gen.root \
+--mc \
+--eventcontent RAWSIM \
+--datatier GEN \
+--conditions 93X_mc2017_realistic_v3 \
+--beamspot Realistic25ns13TeVEarly2017Collision \
+--step GEN \
+--nThreads 1 \
+--geometry DB:Extended \
+--era Run2_2017 \
+--python_filename gen_cfg.py \
+-n 10 \
+--no_exec \
+--customise Configuration/DataProcessing/Utils.addMonitoring

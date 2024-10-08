@@ -1,0 +1,17 @@
+# For ggH, H -> Z phi
+# Originally copied from here:
+# https://cms-pdmv.cern.ch/mcm/requests?prepid=HIG-RunIISummer15wmLHEGS-02636&page=0&shown=1099518443647
+# but with some modifications:
+# - name of configuration file
+# - name of output file
+# - changed datatier from GEN-SIM,LHE to GEN,LHE
+# - changed step from LHE,GEN,SIM to LHE,GEN
+
+cmsDriver.py Configuration/GenProduction/python/gridpacktogen_htozphi_cfg.py \
+--fileout file:gridpacktogen_htozphi.root \
+--mc \
+--eventcontent RAWSIM,LHE \
+--datatier GEN,LHE \
+--conditions auto:mc \
+--step LHE,GEN \
+--number 100

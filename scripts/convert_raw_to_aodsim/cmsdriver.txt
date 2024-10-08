@@ -1,0 +1,22 @@
+# original command
+# (from https://cms-pdmv.cern.ch/mcm/requests?prepid=HIG-RunIIAutumn18DRPremix-01719&page=0&shown=6291583)
+# with similar modifications as gridpack to gensim step:
+# - name of input file, output file and configuration file
+# - number of events
+# note: this is for the 2018 sample, meant to be used with CMSSW_10_2_15_patch2!
+
+cmsDriver.py \
+--python_filename rawtoaodsim_htowplusdsminus_cfg.py \
+--eventcontent AODSIM \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier AODSIM \
+--fileout file:rawtoaodsim_htowplusdsminus.root \
+--conditions 102X_upgrade2018_realistic_v15 \
+--step RAW2DIGI,L1Reco,RECO,RECOSIM,EI \
+--procModifiers premix_stage2 \
+--filein file:gensimtoraw_htowplusdsminus.root \
+--era Run2_2018 \
+--runUnscheduled \
+--no_exec \
+--mc \
+-n 10

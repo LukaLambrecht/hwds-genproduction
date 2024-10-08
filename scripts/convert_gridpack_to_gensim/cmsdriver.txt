@@ -1,0 +1,65 @@
+# original command
+# from https://cms-pdmv.cern.ch/mcm/requests?prepid=HIG-RunIISummer15wmLHEGS-02636&page=0&shown=6815871
+# with minimal changes: 
+# - name of generator fragment and output file
+# note: this is for the 2016 sample and was meant to be used with CMSSW_7_1_42!
+#       it does not work out of the box here in CMSSW_10_2_25!
+
+cmsDriver.py Configuration/GenProduction/python/gridpacktogen_htowplusdsminus_cfg.py \
+--fileout file:gridpacktogensim_htowplusdsminus.root \
+--eventcontent RAWSIM,LHE \
+--customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1,Configuration/DataProcessing/Utils.addMonitoring \
+--datatier GEN-SIM,LHE \
+--conditions MCRUN2_71_V1::All \
+--beamspot Realistic50ns13TeVCollision \
+--step LHE,GEN,SIM \
+--magField 38T_PostLS1 \
+--no_exec \
+--mc \
+-n 10
+
+# same as above with additional modifications in order to make it work for CMSSW_10_2_25:
+# - different global tag 
+#   (see https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideFrontierConditions)
+# - removing specification of magnetic field
+#   (should be configured automatically based on global tag,
+#    see here: https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideMagneticField)
+# note: this global tag is not necessarily the best one, just picked one and it worked.
+# note: following steps in the simulation chain seem to be not so easily fixable,
+#       better to test for 2018 configurations and explicitly switch to older CMSSW versions 
+#       for 2016 and 2017 samples.
+
+cmsDriver.py Configuration/GenProduction/python/gridpacktogen_htowplusdsminus_cfg.py \
+--fileout file:gridpacktogensim_htowplusdsminus.root \
+--eventcontent RAWSIM,LHE \
+--customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1,Configuration/DataProcessing/Utils.addMonitoring \
+--datatier GEN-SIM,LHE \
+--conditions 80X_mcRun2_asymptotic_2016_TrancheIV_v6 \
+--beamspot Realistic50ns13TeVCollision \
+--step LHE,GEN,SIM \
+--no_exec \
+--mc \
+-n 10
+
+# original command 
+# from https://cms-pdmv.cern.ch/mcm/requests?prepid=HIG-RunIIFall18wmLHEGS-02196&page=0&shown=6815871
+# with minimal changes:
+# - name of generator fragment and output file
+# - number of events
+# - remove specification of random seed
+# note: this is for the 2018 sample and was meant to be used with CMSSW_10_2_15_patch2!
+
+cmsDriver.py Configuration/GenProduction/python/gridpacktogen_htowplusdsminus_cfg.py \
+--python_filename gridpacktogensim_htowplusdsminus_cfg.py \
+--eventcontent RAWSIM,LHE \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier GEN-SIM,LHE \
+--fileout file:gridpacktogensim_htowplusdsminus.root \
+--conditions 102X_upgrade2018_realistic_v11 \
+--beamspot Realistic25ns13TeVEarly2018Collision \
+--step LHE,GEN,SIM \
+--geometry DB:Extended \
+--era Run2_2018 \
+--no_exec \
+--mc \
+-n 10

@@ -1,0 +1,10 @@
+cmsDriver.py Configuration/GenProduction/python/gridpacktogen_htowplusdsminus_cfg.py \
+--fileout file:gridpacktogen_htowplusdsminus.root \
+--python_filename gridpacktogen_htowplusdsminus_cfg.py \
+--mc \
+--eventcontent RAWSIM,LHE \
+--datatier GEN,LHE \
+--conditions auto:mc \
+--step LHE,GEN \
+--number 100 \
+--no_exec

@@ -1,0 +1,53 @@
+cmsDriver.py Configuration/GenProduction/python/gridpacktogen_htowplusdsminus_cfg.py \
+--eventcontent RAWSIM,LHE \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier GEN-SIM,LHE \
+--conditions 102X_upgrade2018_realistic_v11 \
+--beamspot Realistic25ns13TeVEarly2018Collision \
+--step LHE,GEN,SIM \
+--geometry DB:Extended \
+--era Run2_2018 \
+--no_exec \
+--mc \
+-n 100
+
+cmsDriver.py \
+--eventcontent PREMIXRAW \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier GEN-SIM-RAW \
+--pileup_input "dbs:/Neutrino_E-10_gun/RunIISummer17PrePremix-PUAutumn18_102X_upgrade2018_realistic_v15-v1/GEN-SIM-DIGI-RAW" \
+--conditions 102X_upgrade2018_realistic_v15 \
+--step DIGI,DATAMIX,L1,DIGI2RAW,HLT:@relval2018 \
+--procModifiers premix_stage2 \
+--geometry DB:Extended \
+--datamix PreMix \
+--era Run2_2018 \
+--no_exec \
+--mc \
+-n 100
+
+cmsDriver.py \
+--eventcontent AODSIM \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier AODSIM \
+--conditions 102X_upgrade2018_realistic_v15 \
+--step RAW2DIGI,L1Reco,RECO,RECOSIM,EI \
+--procModifiers premix_stage2 \
+--era Run2_2018 \
+--runUnscheduled \
+--no_exec \
+--mc \
+-n 100
+
+cmsDriver.py \
+--eventcontent MINIAODSIM \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier MINIAODSIM \
+--conditions 102X_upgrade2018_realistic_v15 \
+--step PAT \
+--geometry DB:Extended \
+--era Run2_2018 \
+--runUnscheduled \
+--no_exec \
+--mc \
+-n 100

@@ -1,0 +1,9 @@
+cmsDriver.py Configuration/GenProduction/python/gridpacktogen_wellnu012j_cfg.py \
+--fileout file:gridpacktogen_wellnu012j.root \
+--mc \
+--eventcontent RAWSIM,LHE \
+--datatier GEN,LHE \
+--conditions auto:mc \
+--step LHE,GEN \
+--number 100 \
+--no_exec

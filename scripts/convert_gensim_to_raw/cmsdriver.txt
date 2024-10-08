@@ -1,0 +1,48 @@
+# original command
+# (from https://cms-pdmv.cern.ch/mcm/requests?prepid=HIG-RunIISummer16DR80Premix-04676&page=0&shown=6815871)
+# with similar modifications as gridpack_to_gensim step:
+# - name of output file, input file and configuration file
+# note: this is meant to be used for 2016 samples in CMSSW_8_0_31
+#       and appears not to work in CMSSW_10_2_25!
+#       it produces a config file in CMSSW_9_4_10, but cannot run on input files
+#       from earlier steps done in CMSSW_10_2_25...
+
+cmsDriver.py \
+--python_filename gensimtoraw_htowplusdsminus_cfg.py \
+--eventcontent PREMIXRAW \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier GEN-SIM-RAW \
+--fileout file:gensimtoraw_htowplusdsminus.root \
+--pileup_input "dbs:/Neutrino_E-10_gun/RunIISpring15PrePremix-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v2-v2/GEN-SIM-DIGI-RAW" \
+--conditions 80X_mcRun2_asymptotic_2016_TrancheIV_v6 \
+--step DIGIPREMIX_S2,DATAMIX,L1,DIGI2RAW,HLT:@frozen2016 \
+--filein file:gridpacktogensim_htowplusdsminus.root \
+--datamix PreMix \
+--era Run2_2016 \
+--no_exec \
+--mc \
+-n 10
+
+# original command for 2018 sample
+# (from https://cms-pdmv.cern.ch/mcm/requests?prepid=HIG-RunIIAutumn18DRPremix-01719&page=0&shown=6291583)
+# with similar modifications as gridpack_to_gensim step:
+# - name of output file, input file and configuration file
+# note: originally meant to be used with CMSSW_10_2_5!
+
+cmsDriver.py \
+--python_filename gensimtoraw_htowplusdsminus_cfg.py \
+--eventcontent PREMIXRAW \
+--customise Configuration/DataProcessing/Utils.addMonitoring \
+--datatier GEN-SIM-RAW \
+--fileout file:gensimtoraw_htowplusdsminus.root \
+--pileup_input "dbs:/Neutrino_E-10_gun/RunIISummer17PrePremix-PUAutumn18_102X_upgrade2018_realistic_v15-v1/GEN-SIM-DIGI-RAW" \
+--conditions 102X_upgrade2018_realistic_v15 \
+--step DIGI,DATAMIX,L1,DIGI2RAW,HLT:@relval2018 \
+--procModifiers premix_stage2 \
+--geometry DB:Extended \
+--filein file:gridpacktogensim_htowplusdsminus.root \
+--datamix PreMix \
+--era Run2_2018 \
+--no_exec \
+--mc \
+-n 10
